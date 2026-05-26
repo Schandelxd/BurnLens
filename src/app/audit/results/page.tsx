@@ -19,14 +19,14 @@ import Link from "next/link";
 
 export default function ResultsPage() {
   const router = useRouter();
-  const details = useAuditStore((state) => state.details);
+  const { toolDetails, monthlyApiSpend, companySize } = useAuditStore();
   const [isLoading, setIsLoading] = useState(true);
   const [isSaved, setIsSaved] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loadingPhase, setLoadingPhase] = useState(0);
 
   useEffect(() => {
-    if (!details.companySize || details.companySize === 0) {
+    if (!companySize || companySize === 0) {
       router.replace("/audit");
       return;
     }
@@ -37,8 +37,8 @@ export default function ResultsPage() {
       
       if (user) {
         setIsLoggedIn(true);
-        const res = await saveAudit(details);
-        if (res.success) {
+        const res = await saveAudit({ toolDetails, monthlyApiSpend, companySize });
+        if (res?.success) {
           setIsSaved(true);
         }
       }
@@ -63,7 +63,7 @@ export default function ResultsPage() {
     }, 2800);
 
     return () => clearTimeout(timer);
-  }, [details, router]);
+  }, [companySize, toolDetails, monthlyApiSpend, router]);
 
   if (isLoading) {
     const loadingTexts = [
@@ -87,7 +87,7 @@ export default function ResultsPage() {
     );
   }
 
-  const results = calculateAuditResults(details);
+  const results = calculateAuditResults(toolDetails, monthlyApiSpend, companySize);
 
   return (
     <PageShell>
@@ -98,8 +98,8 @@ export default function ResultsPage() {
         <Container className="relative z-10 max-w-4xl">
           <div className="space-y-16">
             <ExecutiveSummary 
-              toolCount={Object.values(details.tools).filter(Boolean).length} 
-              totalSeats={details.companySize}
+              toolCount={Object.keys(toolDetails).length} 
+              totalSeats={companySize}
               savings={results.annualSavings}
               topIssue={results.recommendations[0]?.title}
             />

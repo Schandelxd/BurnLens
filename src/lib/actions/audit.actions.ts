@@ -4,16 +4,17 @@ import { createClient } from '@/lib/supabase/server'
 import { z } from 'zod'
 import { calculateAuditResults } from '@/lib/audit-engine'
 
+const ToolStateSchema = z.object({
+  id: z.string(),
+  activeSeats: z.number().nonnegative(),
+  inactiveSeats: z.number().nonnegative(),
+  isEnterprise: z.boolean()
+})
+
 const AuditSchema = z.object({
   companySize: z.number().positive(),
-  apiSpend: z.number().nonnegative(),
-  tools: z.object({
-    cursor: z.boolean(),
-    githubCopilot: z.boolean(),
-    claude: z.boolean(),
-    chatgpt: z.boolean(),
-  }),
-  inactiveSeats: z.number().nonnegative(),
+  monthlyApiSpend: z.number().nonnegative(),
+  toolDetails: z.record(ToolStateSchema),
 })
 
 export async function saveAudit(data: z.infer<typeof AuditSchema>) {
@@ -30,14 +31,18 @@ export async function saveAudit(data: z.infer<typeof AuditSchema>) {
   }
 
   // Calculate deterministic results securely on the server
-  const results = calculateAuditResults(parsed.data)
+  const results = calculateAuditResults(
+    parsed.data.toolDetails,
+    parsed.data.monthlyApiSpend,
+    parsed.data.companySize
+  )
 
   const { error } = await supabase.from('audits').insert({
     profile_id: user.id,
     company_size: parsed.data.companySize,
-    monthly_api_spend: parsed.data.apiSpend,
-    tool_details: parsed.data.tools,
-    gauge_score: results.score,
+    monthly_api_spend: parsed.data.monthlyApiSpend,
+    tool_details: parsed.data.toolDetails,
+    gauge_score: results.gaugeScore,
     annual_savings: results.annualSavings,
     recommendations: results.recommendations,
   })
