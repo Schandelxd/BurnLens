@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { outfit } from "@/lib/fonts";
+import { geistSans } from "@/lib/fonts";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PHProvider } from "@/lib/analytics/posthog";
@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${outfit.className} antialiased bg-background text-foreground min-h-screen flex flex-col`}>
+      <body className={`${geistSans.className} antialiased bg-background text-foreground min-h-screen flex flex-col`}>
         <PHProvider>
           <Navbar />
           <main className="flex-1">

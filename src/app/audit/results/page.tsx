@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { PageShell } from "@/components/layout/PageShell";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-import { useAuditStore } from "@/lib/store/audit";
+import { useAuditStore } from "@/lib/store/audit-store";
 import { calculateAuditResults } from "@/lib/audit-engine";
 import { ExecutiveSummary } from "@/components/audit/ExecutiveSummary";
 import { ScoreAndSavings } from "@/components/audit/ScoreAndSavings";
@@ -23,6 +23,7 @@ export default function ResultsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaved, setIsSaved] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loadingPhase, setLoadingPhase] = useState(0);
 
   useEffect(() => {
     if (!details.companySize || details.companySize === 0) {
@@ -44,20 +45,43 @@ export default function ResultsPage() {
       setIsLoading(false);
     }
 
+    // Cinematic calculation sequence
+    const phases = [
+      { timeout: 0, text: "Analyzing API endpoints..." },
+      { timeout: 800, text: "Cross-referencing seat overlap..." },
+      { timeout: 1600, text: "Calculating deterministic savings..." }
+    ];
+
+    phases.forEach((phase, index) => {
+      setTimeout(() => {
+        setLoadingPhase(index);
+      }, phase.timeout);
+    });
+
     const timer = setTimeout(() => {
       checkAuthAndSave();
-    }, 1500);
+    }, 2800);
 
     return () => clearTimeout(timer);
   }, [details, router]);
 
   if (isLoading) {
+    const loadingTexts = [
+      "Analyzing API endpoints...",
+      "Cross-referencing seat overlap...",
+      "Calculating deterministic savings..."
+    ];
+
     return (
       <PageShell>
         <div className="min-h-[80vh] flex flex-col items-center justify-center">
           <Loader2 className="h-12 w-12 animate-spin text-zinc-500 mb-6" />
-          <h2 className="text-xl font-medium tracking-tighter text-zinc-300">Analyzing API usage...</h2>
-          <p className="mt-2 text-zinc-500">Identifying inefficiencies across {Object.values(details.tools).filter(Boolean).length} tools.</p>
+          <h2 className="text-xl font-medium tracking-tighter text-zinc-300 transition-opacity duration-300">
+            {loadingTexts[loadingPhase]}
+          </h2>
+          <p className="mt-2 text-sm text-zinc-500 tracking-widest uppercase">
+            Gauge Audit Engine
+          </p>
         </div>
       </PageShell>
     );
