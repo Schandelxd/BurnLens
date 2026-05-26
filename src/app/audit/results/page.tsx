@@ -105,7 +105,7 @@ export default function ResultsPage() {
             />
 
             <ScoreAndSavings 
-              score={results.score} 
+              score={results.gaugeScore} 
               monthlySavings={results.monthlySavings} 
               annualSavings={results.annualSavings} 
             />

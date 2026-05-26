@@ -14,7 +14,7 @@ const ToolStateSchema = z.object({
 const AuditSchema = z.object({
   companySize: z.number().positive(),
   monthlyApiSpend: z.number().nonnegative(),
-  toolDetails: z.record(ToolStateSchema),
+  toolDetails: z.record(z.string(), ToolStateSchema),
 })
 
 export async function saveAudit(data: z.infer<typeof AuditSchema>) {

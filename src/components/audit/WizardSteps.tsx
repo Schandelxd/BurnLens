@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "navigation"; // Note: using next/navigation
-import { useRouter as useNextRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAuditStore } from "@/lib/store/audit-store";
 import { TOOL_CATALOG } from "@/lib/audit-engine/pricing";
 import { Button } from "@/components/ui/button";
@@ -13,7 +12,7 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { SlideUp } from "@/components/motion/SlideUp";
 
 export function WizardSteps() {
-  const router = useNextRouter();
+  const router = useRouter();
   const { 
     step, setStep, 
     companySize, setCompanySize, 

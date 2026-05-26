@@ -29,9 +29,9 @@ export function OptimizationCards({ recommendations }: Props) {
       </SlideUp>
       
       {recommendations.map((rec, i) => {
-        const Icon = rec.severity === 'high' ? AlertTriangle : rec.severity === 'medium' ? Zap : Info;
-        const iconColor = rec.severity === 'high' ? 'text-amber-500' : rec.severity === 'medium' ? 'text-emerald-500' : 'text-blue-500';
-        const bgIcon = rec.severity === 'high' ? 'bg-amber-500/10' : rec.severity === 'medium' ? 'bg-emerald-500/10' : 'bg-blue-500/10';
+        const Icon = rec.category === 'inactive' ? AlertTriangle : rec.category === 'overlap' ? Zap : Info;
+        const iconColor = rec.category === 'inactive' ? 'text-amber-500' : rec.category === 'overlap' ? 'text-emerald-500' : 'text-blue-500';
+        const bgIcon = rec.category === 'inactive' ? 'bg-amber-500/10' : rec.category === 'overlap' ? 'bg-emerald-500/10' : 'bg-blue-500/10';
 
         return (
           <SlideUp key={rec.id} delay={0.15 + (i * 0.05)}>
