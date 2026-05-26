@@ -4,6 +4,7 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { SlideUp } from "@/components/motion/SlideUp";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -22,10 +23,12 @@ export function HeroSection() {
         </FadeIn>
         <FadeIn delay={0.2}>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button size="lg" className="h-12 px-8 text-base shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
-              Run your first audit
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Link href="/audit">
+              <Button size="lg" className="h-12 px-8 text-base shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
+                Run your first audit
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
             <Button size="lg" variant="ghost" className="h-12 px-8 text-base">
               View documentation
             </Button>
