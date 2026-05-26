@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { geistSans, geistMono } from "@/lib/fonts";
 import "./globals.css";
+import { outfit } from "@/lib/fonts";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { PHProvider } from "@/lib/analytics/posthog";
 
 export const metadata: Metadata = {
-  title: "Gauge | AI Spend Observability",
-  description: "Premium observability platform for AI spending.",
+  title: "Gauge | Deterministic Cost Auditing",
+  description: "Identify and eliminate wasted API and AI tool spend with purely deterministic auditing.",
 };
 
 export default function RootLayout({
@@ -13,11 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className="dark">
+      <body className={`${outfit.className} antialiased bg-background text-foreground min-h-screen flex flex-col`}>
+        <PHProvider>
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </PHProvider>
       </body>
     </html>
   );

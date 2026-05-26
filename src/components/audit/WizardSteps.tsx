@@ -152,7 +152,7 @@ export function WizardSteps() {
                           />
                         </div>
                         <div>
-                          <Label className="text-xs text-muted-foreground">Inactive Seats (>30d idle)</Label>
+                          <Label className="text-xs text-muted-foreground">Inactive Seats (&gt;30d idle)</Label>
                           <Input 
                             type="number" 
                             value={details.inactiveSeats} 
