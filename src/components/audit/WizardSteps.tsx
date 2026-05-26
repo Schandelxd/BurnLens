@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "navigation"; // Note: using next/navigation
 import { useRouter as useNextRouter } from "next/navigation";
 import { useAuditStore } from "@/lib/store/audit-store";
-import { TOOL_CATALOG } from "@/lib/pricing";
+import { TOOL_CATALOG } from "@/lib/audit-engine/pricing";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

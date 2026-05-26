@@ -1,13 +1,4 @@
-export type ToolCategory = 'development' | 'marketing' | 'general' | 'api';
-
-export interface ToolPricing {
-  id: string;
-  name: string;
-  category: ToolCategory;
-  basePricePerSeat: number; // monthly
-  enterprisePricePerSeat?: number;
-  apiCostPer1kTokens?: number;
-}
+import { ToolPricing } from './types';
 
 export const TOOL_CATALOG: Record<string, ToolPricing> = {
   'github-copilot': {

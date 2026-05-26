@@ -1,5 +1,5 @@
 import { SlideUp } from "@/components/motion/SlideUp";
-import { Recommendation } from "@/lib/recommendations";
+import { Recommendation } from "@/lib/audit-engine/types";
 import { AlertTriangle, Info, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -11,7 +11,7 @@ export function OptimizationCards({ recommendations }: Props) {
   if (recommendations.length === 0) {
     return (
       <SlideUp delay={0.2}>
-        <div className="rounded-xl border border-dashed border-white/10 p-8 text-center">
+        <div className="rounded-3xl border border-white/5 bg-zinc-950 p-12 text-center shadow-2xl">
           <h3 className="font-medium text-zinc-200">No inefficiencies found</h3>
           <p className="mt-2 text-sm text-zinc-400">
             Your AI tooling stack is highly optimized. We couldn't find any overlapping subscriptions or inactive seats.
@@ -24,7 +24,7 @@ export function OptimizationCards({ recommendations }: Props) {
   return (
     <div className="space-y-4 mt-8">
       <SlideUp delay={0.1}>
-        <h3 className="text-lg font-medium text-zinc-200 mb-6">Optimization Opportunities</h3>
+        <h3 className="text-sm font-medium tracking-widest text-zinc-500 uppercase mb-6 mt-16">Optimization Opportunities</h3>
       </SlideUp>
       
       {recommendations.map((rec, i) => {
@@ -44,9 +44,9 @@ export function OptimizationCards({ recommendations }: Props) {
 
         return (
           <SlideUp key={rec.id} delay={0.15 + (i * 0.05)}>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 rounded-xl border border-white/5 bg-zinc-900/40 p-6 transition hover:bg-zinc-900/60">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 rounded-2xl border border-white/5 bg-zinc-950 p-6 transition-all duration-500 hover:border-white/10 hover:bg-zinc-900/20">
               <div className="flex items-start gap-4">
-                <div className={`mt-1 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg ${bgIcon}`}>
+                <div className={`mt-1 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-white/5 bg-white/[0.02]`}>
                   <Icon className={`h-5 w-5 ${iconColor}`} />
                 </div>
                 <div>
@@ -58,11 +58,11 @@ export function OptimizationCards({ recommendations }: Props) {
               </div>
               <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between gap-4 sm:gap-2 ml-14 sm:ml-0">
                 <div className="text-right">
-                  <div className="font-semibold tracking-tight text-emerald-400">
+                  <div className="font-medium tracking-tight text-emerald-400">
                     Save ${rec.impactMonthly}/mo
                   </div>
                 </div>
-                <Button variant="secondary" size="sm" className="h-8 text-xs">
+                <Button variant="ghost" size="sm" className="h-8 text-xs hover:bg-white/5">
                   {rec.category === 'inactive' ? 'Revoke Seats' : 'View Details'}
                 </Button>
               </div>

@@ -1,13 +1,6 @@
-import { TOOL_CATALOG } from '../pricing';
 import { ToolState } from '../store/audit-store';
-
-export interface Recommendation {
-  id: string;
-  title: string;
-  description: string;
-  impactMonthly: number;
-  category: 'overlap' | 'inactive' | 'downgrade';
-}
+import { TOOL_CATALOG } from './pricing';
+import { Recommendation } from './types';
 
 export function generateRecommendations(toolDetails: Record<string, ToolState>): Recommendation[] {
   const recommendations: Recommendation[] = [];

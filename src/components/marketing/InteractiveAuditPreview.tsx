@@ -1,67 +1,57 @@
-import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
+import { Container } from "@/components/layout/Container";
 import { SlideUp } from "@/components/motion/SlideUp";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 export function InteractiveAuditPreview() {
   return (
-    <Section className="relative py-24 sm:py-32 overflow-hidden">
-      {/* Subtle radial gradient background to simulate focus */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-900/40 via-background to-background" />
-      
+    <Section className="pb-32 md:pb-48">
       <Container className="relative">
-        <div className="text-center">
+        <div className="text-center mb-16">
           <SlideUp>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 className="text-3xl font-medium tracking-tight sm:text-5xl">
               Deterministic Cost Analysis
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400">
               Input your current stack and let Gauge calculate your exact optimization potential.
             </p>
           </SlideUp>
         </div>
 
-        <SlideUp delay={0.2} className="mt-16">
-          <Card className="mx-auto max-w-4xl overflow-hidden border-white/5 bg-zinc-950/50 shadow-2xl backdrop-blur-xl">
-            <div className="flex items-center border-b border-white/5 bg-zinc-900/50 px-4 py-3">
+        <SlideUp delay={0.2}>
+          <Card className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/5 bg-zinc-950 shadow-[0_0_100px_-20px_rgba(0,0,0,1)] backdrop-blur-3xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+            <div className="flex items-center border-b border-white/5 bg-zinc-900/20 px-6 py-4">
               <div className="flex gap-2">
-                <div className="h-3 w-3 rounded-full bg-zinc-700" />
-                <div className="h-3 w-3 rounded-full bg-zinc-700" />
-                <div className="h-3 w-3 rounded-full bg-zinc-700" />
+                <div className="h-3 w-3 rounded-full bg-zinc-800" />
+                <div className="h-3 w-3 rounded-full bg-zinc-800" />
+                <div className="h-3 w-3 rounded-full bg-zinc-800" />
               </div>
-              <div className="mx-auto rounded-md bg-zinc-800/50 px-24 py-1 text-xs text-zinc-500">
-                gauge.sh/audit
+              <div className="ml-4 text-xs font-medium text-zinc-500 uppercase tracking-widest">
+                Gauge Audit Engine
               </div>
             </div>
             
-            <div className="p-8 sm:p-12">
-              <div className="grid gap-8 md:grid-cols-3">
-                <div className="col-span-1 flex flex-col justify-center border-r border-white/5 pr-8">
-                  <div className="text-sm text-zinc-400">Gauge Score</div>
-                  <div className="mt-2 text-6xl font-semibold tracking-tighter text-zinc-100">64</div>
-                  <div className="mt-4 inline-flex items-center rounded-full bg-amber-500/10 px-2.5 py-0.5 text-xs font-medium text-amber-500">
-                    Moderately Optimized
+            <div className="p-8 sm:p-16 grid gap-16 md:grid-cols-2">
+                <div className="flex flex-col justify-center border-b border-white/5 pb-16 md:border-b-0 md:border-r md:pb-0 md:pr-16">
+                  <div className="text-sm text-zinc-500 font-medium tracking-wide uppercase">Gauge Score</div>
+                  <div className="mt-4 text-7xl font-medium tracking-tighter text-zinc-100">64<span className="text-3xl text-zinc-700">/100</span></div>
+                  <div className="mt-6 inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-zinc-300 border border-white/10">
+                    Optimization Required
                   </div>
                 </div>
-                <div className="col-span-2 grid gap-6">
-                  <div className="flex items-end justify-between border-b border-white/5 pb-6">
+                <div className="flex flex-col justify-center">
+                  <div className="space-y-12">
                     <div>
-                      <div className="text-sm text-zinc-400">Potential Annual Savings</div>
-                      <div className="mt-2 text-4xl font-semibold tracking-tight text-emerald-400/90">$3,240</div>
+                      <div className="text-sm text-zinc-500 font-medium tracking-wide uppercase">Wasted Spend Found</div>
+                      <div className="mt-2 text-4xl font-medium tracking-tight text-emerald-400">$1,420<span className="text-xl text-emerald-400/50">/mo</span></div>
                     </div>
-                    <Button className="shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
-                      View Full Report
-                    </Button>
-                  </div>
-                  <div className="flex flex-wrap gap-4">
-                     {/* Skeleton blocks representing insights */}
-                     <div className="h-12 w-full max-w-[200px] rounded border border-white/5 bg-zinc-900/30" />
-                     <div className="h-12 w-full max-w-[150px] rounded border border-white/5 bg-zinc-900/30" />
-                     <div className="h-12 w-full max-w-[240px] rounded border border-white/5 bg-zinc-900/30" />
+                    <div>
+                      <div className="text-sm text-zinc-500 font-medium tracking-wide uppercase">Annualized Impact</div>
+                      <div className="mt-2 text-3xl font-medium tracking-tight text-zinc-200">$17,040</div>
+                    </div>
                   </div>
                 </div>
-              </div>
             </div>
           </Card>
         </SlideUp>

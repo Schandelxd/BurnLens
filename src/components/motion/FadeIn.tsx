@@ -26,9 +26,9 @@ export function FadeIn({
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : { opacity: 0 }}
       transition={{
-        duration,
-        delay,
-        ease: "easeOut",
+        duration: 0.8,
+        delay: delay,
+        ease: [0.16, 1, 0.3, 1],
       }}
       className={cn(className)}
     >

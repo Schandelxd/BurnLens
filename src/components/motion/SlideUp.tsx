@@ -28,9 +28,9 @@ export function SlideUp({
       initial={{ opacity: 0, y: yOffset }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: yOffset }}
       transition={{
-        duration,
-        delay,
-        ease: "easeOut",
+        duration: 0.8,
+        delay: delay,
+        ease: [0.16, 1, 0.3, 1], // Cinematic custom cubic-bezier
       }}
       className={cn(className)}
     >
