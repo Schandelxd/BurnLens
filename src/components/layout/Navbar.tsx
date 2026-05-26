@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Container } from "./Container";
+import Link from "next/link";
 
 export function Navbar() {
   return (
@@ -7,15 +8,15 @@ export function Navbar() {
       <Container>
         <div className="flex h-14 items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="font-semibold tracking-tight">Gauge</span>
+            <Link href="/" className="font-semibold tracking-tight">Gauge</Link>
           </div>
           <nav className="flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            <a href="#" className="transition-colors hover:text-foreground">
-              Product
-            </a>
-            <a href="#" className="transition-colors hover:text-foreground">
+            <Link href="/about" className="transition-colors hover:text-foreground">
+              About
+            </Link>
+            <Link href="/pricing" className="transition-colors hover:text-foreground">
               Pricing
-            </a>
+            </Link>
             <a href="#" className="transition-colors hover:text-foreground">
               Docs
             </a>
